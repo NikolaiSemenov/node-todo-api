@@ -133,7 +133,7 @@ describe('DELETE /todos/:id', () => {
 
 	});
 
-	it('should remove a todo', (done) => {
+	it('should not remove a todo created by other user', (done) => {
 		var hexId = todos[0]._id.toHexString();
 		request(app)
 			.delete(`/todos/${hexId}`)
@@ -172,12 +172,12 @@ describe('DELETE /todos/:id', () => {
 
 describe('PATCH /todos/:id', () => {
 	it('should update the todo', (done) => {
-		var hexId = todos[1]._id.toHexString();
+		var hexId = todos[0]._id.toHexString();
 		var text = 'Update from test 1';
 
 		request(app)
 			.patch(`/todos/${hexId}`)
-			.set('x-auth', users[1].tokens[0].token)
+			.set('x-auth', users[0].tokens[0].token)
 			.send({
 				text,
 				completed: true
@@ -191,7 +191,7 @@ describe('PATCH /todos/:id', () => {
 			.end(done);
 	});
 
-	it('should update the todo', (done) => {
+	it('should not update the todo created by other user', (done) => {
 		var hexId = todos[0]._id.toHexString();
 		var text = 'Update from test 1';
 
