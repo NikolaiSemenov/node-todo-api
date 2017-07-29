@@ -60,7 +60,7 @@ UserSchema.methods.removeToken = function (token) {
 	});
 };
 
-UserSchema.statics.FindByToken = function (token) {
+UserSchema.statics.findByToken = function (token) {
 	var User = this;
 	var decoded;
 
